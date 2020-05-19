@@ -1,3 +1,6 @@
+import org.apache.spark.sql.Dataset;
+import org.apache.spark.sql.Row;
+import org.apache.spark.sql.SparkSession;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -12,5 +15,23 @@ public class SGVApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(SGVApplication.class);
+
+        SparkSession sparkSession = SparkSession
+                .builder()
+                .appName("spark-job")
+                .master("local[*]")
+                .config("spark.sql.warehouse.dir", "file:///c:/tmp/")
+                .getOrCreate();
+
+        Dataset<Row> dataset = sparkSession
+                .read()
+                .option("header", true)
+                .csv("C:\\Users\\johnm\\IdeaProjects\\Project-2-Group-1\\web\\guns-10.csv");
+
+        System.out.println("========== Print Schema ============");
+        dataset.printSchema();
+        System.out.println("========== Print Data ==============");
+        dataset.show();
+        System.out.println("========== Print title ==============");
     }
 }
