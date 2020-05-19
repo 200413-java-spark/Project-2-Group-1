@@ -1,3 +1,4 @@
+import com.github.sparkBusiness.MasterSQL;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
@@ -28,10 +29,23 @@ public class SGVApplication {
                 .option("header", true)
                 .csv("C:\\Users\\johnm\\IdeaProjects\\Project-2-Group-1\\web\\guns-10.csv");
 
-        System.out.println("========== Print Schema ============");
-        dataset.printSchema();
-        System.out.println("========== Print Data ==============");
-        dataset.show();
-        System.out.println("========== Print title ==============");
+//        Dataset<Row> dataset = sparkSession
+//                .read()
+//                .option("header", true)
+//                .csv("C:\\Users\\johnm\\IdeaProjects\\Project-2-Group-1\\web\\guns-10.csv");
+//
+//        Dataset<Row> dataset = sparkSession
+//                .read()
+//                .option("header", true)
+//                .csv("C:\\Users\\johnm\\IdeaProjects\\Project-2-Group-1\\web\\guns-10.csv");
+
+
+        MasterSQL masterSQL = new MasterSQL(dataset, sparkSession);
+
+        masterSQL.runQ();
+
+//        System.out.println("========== Print Data ==============");
+//        dataset.show();
+
     }
 }
