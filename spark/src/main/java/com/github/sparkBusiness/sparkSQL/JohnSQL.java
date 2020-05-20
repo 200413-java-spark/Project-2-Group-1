@@ -1,4 +1,4 @@
-package com.github.sparkBusiness;
+package com.github.sparkBusiness.sparkSQL;
 
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;

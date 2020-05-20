@@ -1,7 +1,7 @@
-package com.github.service.calculation;
+package com.github.services;
 
-import com.github.dao.calculation.CalculationRepository;
-import com.github.model.calculation.Calculation;
+import com.github.models.Calculation;
+import com.github.repositories.CalculationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
