@@ -1,3 +1,8 @@
+
+# Additional
+*.project
+*.classpath
+
 # Created by .ignore support plugin (hsz.mobi)
 ### Eclipse template
 .metadata
