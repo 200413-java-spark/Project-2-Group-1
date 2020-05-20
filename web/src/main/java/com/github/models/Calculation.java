@@ -1,4 +1,4 @@
-package com.github.model.calculation;
+package com.github.models;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

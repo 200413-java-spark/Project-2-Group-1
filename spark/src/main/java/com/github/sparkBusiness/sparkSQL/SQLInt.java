@@ -1,4 +1,4 @@
-package com.github.sparkBusiness;
+package com.github.sparkBusiness.sparkSQL;
 
 public interface SQLInt {
 
