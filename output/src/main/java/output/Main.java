@@ -1,4 +1,4 @@
-package com.github.output;
+package output;
 
 public class Main {
 
