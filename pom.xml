@@ -14,44 +14,16 @@
         <version>2.3.0.RELEASE</version>
     </parent>
     <groupId>com.github</groupId>
-    <artifactId>spark-gun-violence</artifactId>
+    <artifactId>spark-life</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>spark-gun-violence</name>
-    <description>Apache Spark gun violence analysis</description>
+    <name>spark-life</name>
+    <description>Apache Spark Life</description>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.codehaus.janino</groupId>
-            <artifactId>commons-compiler</artifactId>
-            <version>3.0.8</version>
-        </dependency>
-        <dependency>
-            <groupId>org.codehaus.janino</groupId>
-            <artifactId>janino</artifactId>
-            <version>3.0.8</version>
-        </dependency>
-    </dependencies>
-
-    <dependencyManagement>
-        <dependencies>
-            <!--Spark java.lang.NoClassDefFoundError: org/codehaus/janino/InternalCompilerException-->
-            <dependency>
-                <groupId>org.codehaus.janino</groupId>
-                <artifactId>commons-compiler</artifactId>
-                <version>3.0.8</version>
-            </dependency>
-            <dependency>
-                <groupId>org.codehaus.janino</groupId>
-                <artifactId>janino</artifactId>
-                <version>3.0.8</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
     <build>
         <plugins>
             <plugin>

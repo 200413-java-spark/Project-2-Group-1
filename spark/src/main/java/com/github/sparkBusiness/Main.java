@@ -12,13 +12,12 @@ public class Main {
                 .builder()
                 .appName("spark-job")
                 .master("local[*]")
-                .config("spark.sql.warehouse.dir", "file:///c:/tmp/")
                 .getOrCreate();
 
         Dataset<Row> dataset = sparkSession
                 .read()
                 .option("header", true)
-                .csv("C:\\Users\\johnm\\IdeaProjects\\Project-2-Group-1-b\\spark\\guns-10.csv");
+                .csv("C:\\Users\\johnm\\IdeaProjects\\Project-2-Group-1-b\\spark\\life.csv");
 
 //        Dataset<Row> dataset = sparkSession
 //                .read()

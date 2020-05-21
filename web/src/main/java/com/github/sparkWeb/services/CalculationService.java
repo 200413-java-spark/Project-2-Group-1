@@ -1,7 +1,7 @@
-package com.github.services;
+package com.github.sparkWeb.services;
 
-import com.github.models.Calculation;
-import com.github.repositories.CalculationRepository;
+import com.github.sparkWeb.models.Calculation;
+import com.github.sparkWeb.repositories.CalculationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
