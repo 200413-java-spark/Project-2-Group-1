@@ -1,6 +1,6 @@
-package com.github.repositories;
+package com.github.sparkWeb.repositories;
 
-import com.github.models.Calculation;
+import com.github.sparkWeb.models.Calculation;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CalculationRepository extends JpaRepository<Calculation, Long> {
