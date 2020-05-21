@@ -11,7 +11,6 @@ import org.junit.Test;
 
 import output.tables.State;
 
-@Ignore
 public class StateDaoTest {
 
     public static StateDao dao = new StateDao();

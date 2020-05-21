@@ -64,37 +64,33 @@ public class StateDao implements Dao<State> {
     
     @Override
     public boolean insertMany(List<State> states) {
-        // if(states.isEmpty() || states == null) {
-        //     return false;
-        // }
-        // String sql = "insert into state(id, state, lease_count) values(?, ?, ?)";
-        // Connection connection = null;
-        // PreparedStatement statement = null;
-        // try {
-        //     connection = DaoUtil.getConnection();
-        //     statement = connection.prepareStatement(sql);
-        //     int id = 1;
-        //     for(State s : states) {
-        //         String state = s.state;
-        //         Integer leaseCount = s.leaseCount;
-        //         if(state.isEmpty() || state == null || leaseCount.equals(null) || leaseCount.intValue() < 0) {
-        //             return false;
-        //         }
-        //         statement.setInt(1, id++);
-        //         statement.setString(2, state);
-        //         statement.setInt(3, leaseCount);
-        //         statement.addBatch();
-        //     }
-        //     statement.executeBatch();
-        //     return true;
-        // } catch (SQLException e) {
-        //     e.printStackTrace();
-        //     return false;
-        // } finally {
-        //     DaoUtil.closeConnection(connection, statement);
-        // }
-
-        return true;
+        if(states.isEmpty() || states == null) {
+            return false;
+        }
+        String sql = "insert into state(id, state) values(?, ?)";
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = DaoUtil.getConnection();
+            statement = connection.prepareStatement(sql);
+            int id = 1;
+            for(State s : states) {
+                String state = s.state;
+                if(state.isEmpty() || state == null) {
+                    return false;
+                }
+                statement.setInt(1, id++);
+                statement.setString(2, state);
+                statement.addBatch();
+            }
+            statement.executeBatch();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            DaoUtil.closeConnection(connection, statement);
+        }
     }
 
     @Override
@@ -146,32 +142,29 @@ public class StateDao implements Dao<State> {
 
     @Override
     public State select(State s) {
-        // if(s.state.isEmpty() || s == null) {
-        //     return null;
-        // }
-        // String sql = "select * from state where state.state = '" + s.state + "'";
-        // Connection connection = null;
-        // Statement statement = null;
-        // ResultSet rs = null;
-        // try {
-        //     connection = DaoUtil.getConnection();
-        //     statement = connection.createStatement();
-        //     rs = statement.executeQuery(sql);
-        //     if(!rs.next()) {
-        //         return null;
-        //     }
-        //     int id = rs.getInt("id");
-        //     String state = rs.getString("state");
-        //     int leaseCount = rs.getInt("lease_count");
-        //     return new State(id, state, leaseCount);
-        // } catch (SQLException e) {
-        //     e.printStackTrace();
-        //     return null;
-        // } finally {
-        //     DaoUtil.closeConnection(connection, statement, rs);
-        // }
-
-        return null;
+        if(s.state.isEmpty() || s == null) {
+            return null;
+        }
+        String sql = "select * from state where state.state = '" + s.state + "'";
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet rs = null;
+        try {
+            connection = DaoUtil.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(sql);
+            if(!rs.next()) {
+                return null;
+            }
+            int id = rs.getInt("id");
+            String state = rs.getString("state");
+            return new State(id, state);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            DaoUtil.closeConnection(connection, statement, rs);
+        }
     }
 
     @Override
