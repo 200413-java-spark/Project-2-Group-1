@@ -1,4 +1,4 @@
-package com.github.models;
+package com.github.sparkWeb.models;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

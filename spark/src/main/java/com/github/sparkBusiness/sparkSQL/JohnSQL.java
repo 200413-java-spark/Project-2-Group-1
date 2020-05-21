@@ -17,34 +17,23 @@ public class JohnSQL implements SQLInt {
     @Override
     public void run() {
 
-        dataset.createOrReplaceTempView("gun_violence");
-        Dataset<Row> results = sparkSession.sql("select incident_id from gun_violence");
+        dataset.createOrReplaceTempView("life");
+        Dataset<Row> results = sparkSession.sql("select State, Life_Expectancy from life");
+        Dataset<Row> results1 = sparkSession.sql("select County, Life_Expectancy from life");
+
         results.show();
+
+        results1.show();
     }
 }
-//incident_id,
-// date,state,
-// city_or_county,
-// address,n_killed,
-// n_injured,incident_url,
-// source_url,
-// incident_url_fields_missing,
-// congressional_district,
-// gun_stolen,
-// gun_type,
-// incident_characteristics,
-// latitude,
-// location_description,
-// longitude,
-// n_guns_involved,
-// notes,
-// participant_age,
-// participant_age_group,
-// participant_gender,
-// participant_name,
-// participant_relationship,
-// participant_status,
-// participant_type,
-// sources,
-// state_house_district,
-// state_senate_district
+// State,
+// County,
+// Life_Expectancy,
+// Life_Expectancy_Range,
+// Life_Expectancy_Standard_Error
+
+// State, Life_Expectancy
+
+// County, Life_Expectancy
+
+//Alabama,"Autauga County, AL",0201.00,73.1,56.9-75.1,2.2348
