@@ -15,7 +15,7 @@ public class StateDao implements Dao<State> {
     @Override
     public int count() {
         int count = -1;
-        String sql = "select count(*) as total from states";
+        String sql = "select count(*) as total from state";
         Connection connection = null;
         Statement statement = null;
         ResultSet rs = null;
@@ -42,7 +42,7 @@ public class StateDao implements Dao<State> {
         // if(state.isEmpty() || state == null || leaseCount.equals(null) || leaseCount.intValue() < 0) {
         //     return false;
         // }
-        // String sql = "insert into states(state, lease_count) values(?, ?)";
+        // String sql = "insert into state(state, lease_count) values(?, ?)";
         // Connection connection = null;
         // PreparedStatement statement = null;
         // try {
@@ -67,7 +67,7 @@ public class StateDao implements Dao<State> {
         // if(states.isEmpty() || states == null) {
         //     return false;
         // }
-        // String sql = "insert into states(id, state, lease_count) values(?, ?, ?)";
+        // String sql = "insert into state(id, state, lease_count) values(?, ?, ?)";
         // Connection connection = null;
         // PreparedStatement statement = null;
         // try {
@@ -108,7 +108,7 @@ public class StateDao implements Dao<State> {
         // if(s == null || s.state.isEmpty() || s.state == null) {
         //     return false;
         // }
-        // String sql = "delete from states where states.state = '" + s.state + "'";
+        // String sql = "delete from state where state.state = '" + s.state + "'";
         // Connection connection = null;
         // Statement statement = null;
         // try {
@@ -128,22 +128,20 @@ public class StateDao implements Dao<State> {
 
     @Override
     public boolean deleteAll() {
-        // String sql = "delete from states";
-        // Connection connection = null;
-        // Statement statement = null;
-        // try {
-        //     connection = DaoUtil.getConnection();
-        //     statement = connection.createStatement();
-        //     statement.execute(sql);
-        //     return true;
-        // } catch (SQLException e) {
-        //     e.printStackTrace();
-        //     return false;
-        // } finally {
-        //     DaoUtil.closeConnection(connection, statement);
-        // }
-
-        return true;
+        String sql = "delete from state";
+        Connection connection = null;
+        Statement statement = null;
+        try {
+            connection = DaoUtil.getConnection();
+            statement = connection.createStatement();
+            statement.execute(sql);
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            DaoUtil.closeConnection(connection, statement);
+        }
     }
 
     @Override
@@ -151,7 +149,7 @@ public class StateDao implements Dao<State> {
         // if(s.state.isEmpty() || s == null) {
         //     return null;
         // }
-        // String sql = "select * from states where states.state = '" + s.state + "'";
+        // String sql = "select * from state where state.state = '" + s.state + "'";
         // Connection connection = null;
         // Statement statement = null;
         // ResultSet rs = null;
@@ -178,7 +176,7 @@ public class StateDao implements Dao<State> {
 
     @Override
     public List<State> selectAll() {
-        // String sql = "select * from states";
+        // String sql = "select * from state";
         // Statement statement = connection.createStatement();
         // ResultSet rs = statement.executeQuery(sql);
         // while (rs.next()) { ... }
