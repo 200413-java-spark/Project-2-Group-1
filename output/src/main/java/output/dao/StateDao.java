@@ -15,7 +15,7 @@ public class StateDao implements Dao<State> {
     @Override
     public int count() {
         int count = -1;
-        String sql = "select count(*) as total from state";
+        String sql = "SELECT count(*) AS total FROM state";
         Connection connection = null;
         Statement statement = null;
         ResultSet rs = null;
@@ -23,15 +23,13 @@ public class StateDao implements Dao<State> {
             connection = DaoUtil.getConnection();
             statement = connection.createStatement();
             rs = statement.executeQuery(sql);
-            while (rs.next()) {
-                count = rs.getInt("total");
-            }
+            while (rs.next()) count = rs.getInt("total");
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             DaoUtil.closeConnection(connection, statement, rs);
-            return count;
         }
+        return count;
     }
 
     @Override
@@ -61,26 +59,36 @@ public class StateDao implements Dao<State> {
     
         return true;
     }
-    
+
     @Override
     public boolean insertMany(List<State> states) {
         if(states.isEmpty() || states == null) {
             return false;
         }
-        String sql = "insert into state(id, state) values(?, ?)";
+        // String name = null;
+        // String abbreviation = null;
+        // String region = null;
+        // double min = 0;
+        // double max = 0;
+        // double average = 0;
+        // double standardDeviation = 0;
+        // int rank = 0;
+        String sql = "INSERT INTO state (name, abbreviation, region, min, max, average, standard_deviation, rank) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         Connection connection = null;
         PreparedStatement statement = null;
         try {
             connection = DaoUtil.getConnection();
             statement = connection.prepareStatement(sql);
-            int id = 1;
-            for(State s : states) {
-                String state = s.state;
-                if(state.isEmpty() || state == null) {
-                    return false;
-                }
-                statement.setInt(1, id++);
-                statement.setString(2, state);
+            for(State state : states) {
+                if(state == null || state.name == null || state.name.isEmpty()) return false;
+                statement.setString(1, state.name);
+                statement.setString(2, state.abbreviation);
+                statement.setString(3, state.region);
+                statement.setDouble(4, state.min);
+                statement.setDouble(5, state.max);
+                statement.setDouble(6, state.average);
+                statement.setDouble(7, state.standardDeviation);
+                statement.setInt(8, state.rank);
                 statement.addBatch();
             }
             statement.executeBatch();
@@ -124,7 +132,7 @@ public class StateDao implements Dao<State> {
 
     @Override
     public boolean deleteAll() {
-        String sql = "delete from state";
+        String sql = "DELETE FROM state";
         Connection connection = null;
         Statement statement = null;
         try {
@@ -141,11 +149,20 @@ public class StateDao implements Dao<State> {
     }
 
     @Override
-    public State select(State s) {
-        if(s.state.isEmpty() || s == null) {
-            return null;
+    public State select(State state) {
+        if (state == null) return null;
+        String sql = null;
+        if (state.name == null || state.name.isEmpty()) {
+            if (state.abbreviation == null || state.abbreviation.isEmpty()) return null;
+            else sql = "SELECT * FROM state WHERE state.abbreviation = '" + state.abbreviation + "'";
         }
-        String sql = "select * from state where state.state = '" + s.state + "'";
+        else if (state.abbreviation == null || state.abbreviation.isEmpty()) {
+            if (state.name == null || state.name.isEmpty()) return null;
+            else sql = "SELECT * FROM state WHERE state.name = '" + state.name + "'";
+        }
+        else {
+            sql = "SELECT * FROM state WHERE state.abbreviation = '" + state.abbreviation + "'";
+        }
         Connection connection = null;
         Statement statement = null;
         ResultSet rs = null;
@@ -153,12 +170,10 @@ public class StateDao implements Dao<State> {
             connection = DaoUtil.getConnection();
             statement = connection.createStatement();
             rs = statement.executeQuery(sql);
-            if(!rs.next()) {
-                return null;
-            }
-            int id = rs.getInt("id");
-            String state = rs.getString("state");
-            return new State(id, state);
+            if(!rs.next()) return null;
+            String name = rs.getString("name");
+            String abbreviation = rs.getString("abbreviation");
+            return new State(name, abbreviation);
         } catch (SQLException e) {
             e.printStackTrace();
             return null;

@@ -18,9 +18,9 @@ public class StateDaoTest {
 
     @BeforeClass
     public static void setup() {
-        states.add(new State(1, "NY"));
-        states.add(new State(2, "TX"));
-        states.add(new State(3, "HI"));
+        states.add(new State("New York", "NY"));
+        states.add(new State("Texas", "TX"));
+        states.add(new State("Hawaii", "HI"));
         dao.deleteAll();
     }
 
@@ -33,8 +33,9 @@ public class StateDaoTest {
 
     @Test
     public void testSelect(){
-        State state = dao.select(new State("TX"));
-        Assert.assertEquals(2, state.id);
+        State state = dao.select(new State("Texas", "TX"));
+        Assert.assertEquals("Texas", state.name);
+        Assert.assertEquals("TX", state.abbreviation);
     }
 
     @AfterClass
