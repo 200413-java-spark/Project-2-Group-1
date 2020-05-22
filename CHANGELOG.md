@@ -1,4 +1,17 @@
-# Apache Spark Gun Violence Analysis 0.0.1
+# Changelog
+## Version 0.0.2
+
+- output module
+- spark module
+
+## Changed
+- version of sparksql
+- dataset
+
+## Removed 
+- legacy modules
+
+## Version 0.0.1
 
 ##Added:
 - file structure 
