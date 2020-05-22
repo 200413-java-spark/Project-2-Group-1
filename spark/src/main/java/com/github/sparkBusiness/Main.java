@@ -1,53 +1,37 @@
 package com.github.sparkBusiness;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
-
-import com.amazonaws.auth.AWSCredentials;
-import com.amazonaws.auth.AWSStaticCredentialsProvider;
-import com.amazonaws.auth.BasicAWSCredentials;
-import com.amazonaws.regions.Regions;
-import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.AmazonS3ClientBuilder;
-import com.amazonaws.services.s3.model.Bucket;
-import com.amazonaws.services.s3.model.ObjectListing;
-import com.amazonaws.services.s3.model.S3ObjectInputStream;
-import com.amazonaws.services.s3.model.S3ObjectSummary;
-import com.esotericsoftware.minlog.Log;
 import com.github.sparkBusiness.sparkSQL.MasterSQL;
-
-import org.apache.commons.io.FileUtils;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
 
 public class Main {
         public static void main(String[] args) {
-
-//                SparkSession sparkSession = SparkSession.builder().appName("spark-job").master("local[*]").getOrCreate();
+//                LOCAL:
                 SparkSession sparkSession = SparkSession
                         .builder()
                         .appName("spark-job")
+                        .master("local[*]")
                         .getOrCreate();
 
                 Dataset<Row> dataset = sparkSession
                         .read()
                         .option("header", true)
-                        .csv("s3n://p2storage-jsd/life.csv");
+                        .csv("spark/life.csv");
+//                LOCAL:
 
-//         bucket name       p2storage-jsd
-//         "AKIAVHITM6YLVOI6OROV", "8EUqcjoEn3SGWpcxhQ2DdfTTQqN52CEQDC6xHfF/"
+//                EMR:
+//                SparkSession sparkSession = SparkSession
+//                        .builder()
+//                        .appName("spark-job")
+//                        .getOrCreate();
+//
+//                Dataset<Row> dataset = sparkSession
+//                        .read()
+//                        .option("header", true)
+//                        .csv("s3://p2storage-jsd/life.csv");
+//                EMR:
 
-                // Dataset<Row> dataset = sparkSession
-                // .read()
-                // .option("header", true)
-                // .csv("C:\\Users\\johnm\\IdeaProjects\\Project-2-Group-1\\web\\guns-10.csv");
-                //
-                // Dataset<Row> dataset = sparkSession
-                // .read()
-                // .option("header", true)
-                // .csv("C:\\Users\\johnm\\IdeaProjects\\Project-2-Group-1\\web\\guns-10.csv");
 
                 MasterSQL masterSQL = new MasterSQL(dataset, sparkSession);
 

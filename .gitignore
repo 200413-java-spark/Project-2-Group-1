@@ -191,3 +191,4 @@ hs_err_pid*
 *.iml
 .idea/
 *.csv
+spark/src/main/resources/localdump/*
