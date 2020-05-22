@@ -12,6 +12,7 @@
     <artifactId>spark</artifactId>
     <packaging>jar</packaging>
 
+
     <dependencies>
         <dependency>
             <groupId>org.apache.spark</groupId>
@@ -33,5 +34,22 @@
             <artifactId>janino</artifactId>
             <version>3.0.8</version>
         </dependency>
+
     </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.0.2</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.github.sparkBusiness.Main</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

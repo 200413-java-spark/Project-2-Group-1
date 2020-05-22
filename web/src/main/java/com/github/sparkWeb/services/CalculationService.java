@@ -17,10 +17,10 @@ public class CalculationService {
     private CalculationRepository calculationRepository;
 
 
-    @PostConstruct
-    public void init(){
-        calculationRepository.saveAll((Stream.of(new Calculation(1,45.55),new Calculation(2,2.345)).collect(Collectors.toList())));
-    }
+//    @PostConstruct
+//    public void init(){
+//        calculationRepository.saveAll((Stream.of(new Calculation(1,45.55),new Calculation(2,2.345)).collect(Collectors.toList())));
+//    }
 
     public List<Calculation> getCalculations(){
         return calculationRepository.findAll();
