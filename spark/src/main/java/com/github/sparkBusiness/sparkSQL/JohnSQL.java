@@ -30,8 +30,8 @@ results
         .format("csv")
         .option("header", "true")
         .mode(SaveMode.Overwrite)
-        .save("spark/src/main/resources/tes");
-//        .save("s3n://p2storage-jsd/");
+        .save("spark/src/main/resources/localdump");
+//        .save("s3://p2storage-jsd/output/");
 
 
         // County, Life Expectancy
