@@ -7,7 +7,7 @@ import org.apache.spark.sql.SparkSession;
 public class MasterSQL {
 
     public Dataset<Row> dataset;
-    public  SparkSession sparkSession;
+    public SparkSession sparkSession;
 
 
     public MasterSQL(Dataset<Row> dataset, SparkSession sparkSession) {

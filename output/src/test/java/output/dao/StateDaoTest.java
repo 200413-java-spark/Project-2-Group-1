@@ -1,15 +1,13 @@
 package output.dao;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
-
 import output.tables.State;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class StateDaoTest {
 
@@ -24,22 +22,22 @@ public class StateDaoTest {
         dao.deleteAll();
     }
 
+    @AfterClass
+    public static void clearTable() {
+        dao.deleteAll();
+    }
+
     @Test
-    public void testInsertMany(){
+    public void testInsertMany() {
         Assert.assertEquals(0, dao.count());
         Assert.assertTrue(dao.insertMany(states));
         Assert.assertEquals(3, dao.count());
     }
 
     @Test
-    public void testSelect(){
+    public void testSelect() {
         State state = dao.select(new State("TX"));
         Assert.assertEquals(2, state.id);
-    }
-
-    @AfterClass
-    public static void clearTable() {
-        dao.deleteAll();
     }
 
 }

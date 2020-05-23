@@ -1,7 +1,7 @@
 package output.tables;
 
 public class State {
-    
+
     public int id;
     public String state;
 

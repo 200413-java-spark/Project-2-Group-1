@@ -3,7 +3,7 @@ package output.dao;
 import java.util.List;
 
 public interface Dao<E> {
-    
+
     int count();
 
     boolean insert(E e);
