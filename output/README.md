@@ -1,8 +1,8 @@
 # Output Module
-This application is a batch job that extracts a file from an AWS S3 bucket, transforms the data into a relational format, and then persists the transformed data to an SQL database.
+This application is a batch job that extracts a file from an AWS S3 bucket, transforms the data into a relational format, and loads the transformed data to an SQL database.
 
 ## Build
-#### Package Maven Project:
+#### Package Maven project:
     mvn clean package
 
 ## Usage
@@ -16,8 +16,7 @@ This application is a batch job that extracts a file from an AWS S3 bucket, tran
     ./run-app.sh
 
 ## Tests
-### Unit Tests
-#### Run JUnit tests (format reference):
+#### Execute JUnit tests (format reference):
     mvn clean test -Dtest=TestClassName#testOne+testTwo
 #### Test utility classes:
     mvn clean test -Dtest=AppPropertiesTest
@@ -29,12 +28,11 @@ This application is a batch job that extracts a file from an AWS S3 bucket, tran
 #### Connect:
     psql --host=3.17.207.114 --port=5432 --username=mydb --password --dbname=mydb
     psql postgresql://3.17.207.114:5432/mydb mydb
-#### Build Schema:
+#### Build schema:
     psql -h 3.17.207.114 -p 5432 -d mydb -U mydb -a -q -f src/main/resources/schema.sql
-#### Show Schema:
+#### Show data:
     psql -h 3.17.207.114 -p 5432 -d mydb -U mydb -a -q -f src/main/resources/display.sql
 
 ## More
 #### View Spark results:
->localhost:4040
 >localhost:4040/jobs
