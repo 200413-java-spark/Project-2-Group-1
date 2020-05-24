@@ -1,14 +1,10 @@
 package output.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.List;
-
 import output.tables.State;
 import output.util.DaoUtil;
+
+import java.sql.*;
+import java.util.List;
 
 public class StateDao implements Dao<State> {
 
@@ -58,13 +54,13 @@ public class StateDao implements Dao<State> {
         // } finally {
         //     DaoUtil.closeConnection(connection, statement);
         // }
-    
+
         return true;
     }
-    
+
     @Override
     public boolean insertMany(List<State> states) {
-        if(states.isEmpty() || states == null) {
+        if (states.isEmpty() || states == null) {
             return false;
         }
         String sql = "insert into state(id, state) values(?, ?)";
@@ -74,9 +70,9 @@ public class StateDao implements Dao<State> {
             connection = DaoUtil.getConnection();
             statement = connection.prepareStatement(sql);
             int id = 1;
-            for(State s : states) {
+            for (State s : states) {
                 String state = s.state;
-                if(state.isEmpty() || state == null) {
+                if (state.isEmpty() || state == null) {
                     return false;
                 }
                 statement.setInt(1, id++);
@@ -142,7 +138,7 @@ public class StateDao implements Dao<State> {
 
     @Override
     public State select(State s) {
-        if(s.state.isEmpty() || s == null) {
+        if (s.state.isEmpty() || s == null) {
             return null;
         }
         String sql = "select * from state where state.state = '" + s.state + "'";
@@ -153,7 +149,7 @@ public class StateDao implements Dao<State> {
             connection = DaoUtil.getConnection();
             statement = connection.createStatement();
             rs = statement.executeQuery(sql);
-            if(!rs.next()) {
+            if (!rs.next()) {
                 return null;
             }
             int id = rs.getInt("id");

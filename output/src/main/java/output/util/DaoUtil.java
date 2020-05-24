@@ -1,12 +1,8 @@
 package output.util;
 
-import static output.util.AppProperties.PROPERTIES;
+import java.sql.*;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import static output.util.AppProperties.PROPERTIES;
 
 public final class DaoUtil {
 
@@ -35,7 +31,7 @@ public final class DaoUtil {
     }
 
     public static void closeConnection(Connection connection, Statement statement) {
-        if(statement != null) {
+        if (statement != null) {
             try {
                 statement.close();
             } catch (SQLException e) {
@@ -52,14 +48,14 @@ public final class DaoUtil {
     }
 
     public static void closeConnection(Connection connection, Statement statement, ResultSet rs) {
-        if(rs != null) {
+        if (rs != null) {
             try {
                 rs.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
-        if(statement != null) {
+        if (statement != null) {
             try {
                 statement.close();
             } catch (SQLException e) {
@@ -73,11 +69,11 @@ public final class DaoUtil {
                 e.printStackTrace();
             }
         }
-	}
+    }
 
-	public static boolean clearTables() {
+    public static boolean clearTables() {
         // clear database tables...
         return true;
-	}
+    }
 
 }

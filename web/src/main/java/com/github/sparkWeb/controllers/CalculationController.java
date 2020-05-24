@@ -16,7 +16,7 @@ public class CalculationController {
     private CalculationService calculationService;
 
     @GetMapping("/calculations")
-    public List<Calculation> getCalculations(){
+    public List<Calculation> getCalculations() {
         return calculationService.getCalculations();
     }
 

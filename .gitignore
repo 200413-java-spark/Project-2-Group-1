@@ -192,3 +192,5 @@ hs_err_pid*
 .idea/
 *.csv
 spark/src/main/resources/localdump/*
+/output/src/main/resources/creds.properties
+spark/src/main/resources/localdump/*

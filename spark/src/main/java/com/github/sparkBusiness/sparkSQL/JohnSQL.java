@@ -24,14 +24,14 @@ public class JohnSQL implements SQLInt {
         Dataset<Row> results = sparkSession
                 .sql("select State, format_number(avg(Life_Expectancy), 2) as Average_Life_Expectancy from life group by State order by Average_Life_Expectancy desc");
 
-results
-        .coalesce(1)
-        .write()
-        .format("csv")
-        .option("header", "true")
-        .mode(SaveMode.Overwrite)
-        .save("spark/src/main/resources/localdump");
-//        .save("s3://p2storage-jsd/output/");
+        results
+                .coalesce(1)
+                .write()
+                .format("csv")
+                .option("header", "true")
+                .mode(SaveMode.Overwrite)
+                .save("spark/src/main/resources/localdump");
+//        .save("s3://p2storage-jsd/");
 
 
         // County, Life Expectancy

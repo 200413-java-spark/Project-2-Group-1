@@ -1,12 +1,12 @@
 package output.util;
 
-import java.sql.Connection;
-
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.sql.Connection;
+
 public class DaoUtilTest {
-    
+
     @Test
     public void testConnection() {
         Connection connection = null;
