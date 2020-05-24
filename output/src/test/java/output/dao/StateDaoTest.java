@@ -3,12 +3,14 @@ package output.dao;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import output.tables.State;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Ignore
 public class StateDaoTest {
 
     public static StateDao dao = new StateDao();

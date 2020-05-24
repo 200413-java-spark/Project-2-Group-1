@@ -3,6 +3,7 @@ package output.util;
 import java.sql.*;
 
 import static output.util.AppProperties.PROPERTIES;
+import static output.dao.StateDao.stateDao;
 
 public final class DaoUtil {
 
@@ -72,7 +73,7 @@ public final class DaoUtil {
     }
 
     public static boolean clearTables() {
-        // clear database tables...
+        stateDao.deleteAll();
         return true;
     }
 
