@@ -1,14 +1,10 @@
 package output.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.List;
-
 import output.tables.State;
 import output.util.DaoUtil;
+
+import java.sql.*;
+import java.util.List;
 
 public class StateDao implements Dao<State> {
 
@@ -56,13 +52,13 @@ public class StateDao implements Dao<State> {
         // } finally {
         //     DaoUtil.closeConnection(connection, statement);
         // }
-    
+
         return true;
     }
 
     @Override
     public boolean insertMany(List<State> states) {
-        if(states.isEmpty() || states == null) {
+        if (states.isEmpty() || states == null) {
             return false;
         }
         // String name = null;

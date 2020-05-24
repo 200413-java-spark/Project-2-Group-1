@@ -1,5 +1,9 @@
 # Changelog
 ## Version 0.0.2
+- added s3 functionality
+- fixed emr errors
+
+## Version 0.0.2
 
 - output module
 - spark module
