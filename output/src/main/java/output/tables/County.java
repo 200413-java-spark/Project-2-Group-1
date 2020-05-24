@@ -15,6 +15,11 @@ public class County {
         this.name = name;
     }
 
+    public County(String name, String state) {
+        this.name = name;
+        this.state = state;
+    }
+
     public County(int id, String name, String state, double min, double max, double average, double standardDeviation, int rank) {
         this.id = id;
         this.name = name;
