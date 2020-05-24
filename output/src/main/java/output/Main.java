@@ -1,8 +1,12 @@
 package output;
 
-import java.util.List;
-
+import output.load.LoadRegionData;
+import output.load.LoadStateData;
+import output.load.LoadCountyData;
 import output.s3.GetS3File;
+import output.transform.TransformRegionData;
+import output.transform.TransformStateData;
+import output.transform.TransformCountyData;
 import output.util.DaoUtil;
 
 public class Main {
@@ -25,9 +29,15 @@ public class Main {
     }
 
     private static void transform() {
+        TransformRegionData.execute();
+        TransformStateData.execute();
+        TransformCountyData.execute();
     }
     
     private static void load() {
+        LoadRegionData.execute();
+        LoadStateData.execute();
+        LoadCountyData.execute();
     }
 
 }

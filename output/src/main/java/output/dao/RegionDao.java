@@ -1,8 +1,5 @@
 package output.dao;
 
-import output.tables.State;
-import output.util.DaoUtil;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,14 +8,17 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StateDao implements Dao<State> {
-    
-    public static final StateDao stateDao = new StateDao();
+import output.tables.Region;
+import output.util.DaoUtil;
+
+public class RegionDao implements Dao<Region> {
+
+    public static final RegionDao regionDao = new RegionDao();
 
     @Override
     public int count() {
         int count = -1;
-        String sql = "SELECT count(*) AS total FROM state";
+        String sql = "SELECT count(*) AS total FROM region";
         Connection connection = null;
         Statement statement = null;
         ResultSet rs = null;
@@ -36,22 +36,21 @@ public class StateDao implements Dao<State> {
     }
 
     @Override
-    public boolean insert(State state) {
-        if (state.name == null || state.name.isEmpty()) return false;
-        String sql = "INSERT INTO state (name, abbreviation, region, min, max, average, standard_deviation, rank) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    public boolean insert(Region region) {
+        if (region.name == null || region.name.isEmpty()) return false;
+        String sql = "INSERT INTO region (name, abbreviation, min, max, average, standard_deviation, rank) VALUES (?, ?, ?, ?, ?, ?, ?)";
         Connection connection = null;
         PreparedStatement statement = null;
         try {
             connection = DaoUtil.getConnection();
             statement = connection.prepareStatement(sql);
-            statement.setString(1, state.name);
-            statement.setString(2, state.abbreviation);
-            statement.setString(3, state.region);
-            statement.setDouble(4, state.min);
-            statement.setDouble(5, state.max);
-            statement.setDouble(6, state.average);
-            statement.setDouble(7, state.standardDeviation);
-            statement.setInt(8, state.rank);
+            statement.setString(1, region.name);
+            statement.setString(2, region.abbreviation);
+            statement.setDouble(3, region.min);
+            statement.setDouble(4, region.max);
+            statement.setDouble(5, region.average);
+            statement.setDouble(6, region.standardDeviation);
+            statement.setInt(7, region.rank);
             statement.execute();
             return true;
         } catch (SQLException e) {
@@ -63,24 +62,23 @@ public class StateDao implements Dao<State> {
     }
 
     @Override
-    public boolean insertMany(List<State> states) {
-        if (states == null || states.isEmpty()) return false;
-        String sql = "INSERT INTO state (name, abbreviation, region, min, max, average, standard_deviation, rank) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    public boolean insertMany(List<Region> regions) {
+        if (regions == null || regions.isEmpty()) return false;
+        String sql = "INSERT INTO region (name, abbreviation, min, max, average, standard_deviation, rank) VALUES (?, ?, ?, ?, ?, ?, ?)";
         Connection connection = null;
         PreparedStatement statement = null;
         try {
             connection = DaoUtil.getConnection();
             statement = connection.prepareStatement(sql);
-            for (State state : states) {
-                if (state == null || state.name == null || state.name.isEmpty()) continue;
-                statement.setString(1, state.name);
-                statement.setString(2, state.abbreviation);
-                statement.setString(3, state.region);
-                statement.setDouble(4, state.min);
-                statement.setDouble(5, state.max);
-                statement.setDouble(6, state.average);
-                statement.setDouble(7, state.standardDeviation);
-                statement.setInt(8, state.rank);
+            for (Region region : regions) {
+                if (region == null || region.name == null || region.name.isEmpty()) continue;
+                statement.setString(1, region.name);
+                statement.setString(2, region.abbreviation);
+                statement.setDouble(3, region.min);
+                statement.setDouble(4, region.max);
+                statement.setDouble(5, region.average);
+                statement.setDouble(6, region.standardDeviation);
+                statement.setInt(7, region.rank);
                 statement.addBatch();
             }
             statement.executeBatch();
@@ -94,18 +92,18 @@ public class StateDao implements Dao<State> {
     }
 
     @Override
-    public boolean updateManyByName(List<State> states, String column) {
-        if (states == null || states.isEmpty() || column == null || column.isEmpty()) return false;
-        String sql = "UPDATE state SET " + column + " = ? WHERE name = ?";
+    public boolean updateManyByName(List<Region> regions, String column) {
+        if (regions == null || regions.isEmpty() || column == null || column.isEmpty()) return false;
+        String sql = "UPDATE region SET " + column + " = ? WHERE name = ?";
         Connection connection = null;
         PreparedStatement statement = null;
         try {
             connection = DaoUtil.getConnection();
             statement = connection.prepareStatement(sql);
-            for (State state : states) {
-                if (state == null || state.name == null || state.name.isEmpty()) continue;
-                statement.setDouble(1, state.getDouble(column));
-                statement.setString(2, state.name);
+            for (Region region : regions) {
+                if (region == null || region.name == null || region.name.isEmpty()) continue;
+                statement.setDouble(1, region.getDouble(column));
+                statement.setString(2, region.name);
                 statement.addBatch();
             }
             statement.executeBatch();
@@ -119,18 +117,18 @@ public class StateDao implements Dao<State> {
     }
 
     @Override
-    public boolean updateManyByAbbreviation(List<State> states, String column) {
-        if (states == null || states.isEmpty() || column == null || column.isEmpty()) return false;
-        String sql = "UPDATE state SET " + column + " = ? WHERE abbreviation = ?";
+    public boolean updateManyByAbbreviation(List<Region> regions, String column) {
+        if (regions == null || regions.isEmpty() || column == null || column.isEmpty()) return false;
+        String sql = "UPDATE region SET " + column + " = ? WHERE abbreviation = ?";
         Connection connection = null;
         PreparedStatement statement = null;
         try {
             connection = DaoUtil.getConnection();
             statement = connection.prepareStatement(sql);
-            for (State state : states) {
-                if (state == null || state.abbreviation == null || state.abbreviation.isEmpty()) continue;
-                statement.setDouble(1, state.getDouble(column));
-                statement.setString(2, state.abbreviation);
+            for (Region region : regions) {
+                if (region == null || region.abbreviation == null || region.abbreviation.isEmpty()) continue;
+                statement.setDouble(1, region.getDouble(column));
+                statement.setString(2, region.abbreviation);
                 statement.addBatch();
             }
             statement.executeBatch();
@@ -144,18 +142,18 @@ public class StateDao implements Dao<State> {
     }
 
     @Override
-    public boolean updateManyById(List<State> states, String column) {
-        if (states == null || states.isEmpty() || column == null || column.isEmpty()) return false;
-        String sql = "UPDATE state SET " + column + " = ? WHERE id = ?";
+    public boolean updateManyById(List<Region> regions, String column) {
+        if (regions == null || regions.isEmpty() || column == null || column.isEmpty()) return false;
+        String sql = "UPDATE region SET " + column + " = ? WHERE id = ?";
         Connection connection = null;
         PreparedStatement statement = null;
         try {
             connection = DaoUtil.getConnection();
             statement = connection.prepareStatement(sql);
-            for (State state : states) {
-                if (state == null) continue;
-                statement.setDouble(1, state.getDouble(column));
-                statement.setInt(2, state.id);
+            for (Region region : regions) {
+                if (region == null) continue;
+                statement.setDouble(1, region.getDouble(column));
+                statement.setInt(2, region.id);
                 statement.addBatch();
             }
             statement.executeBatch();
@@ -169,9 +167,9 @@ public class StateDao implements Dao<State> {
     }
 
     @Override
-    public boolean delete(State state) {
-        if (state == null || state.name == null || state.name.isEmpty()) return false;
-        String sql = "DELETE FROM state WHERE name = '" + state.name + "'";
+    public boolean delete(Region region) {
+        if (region == null || region.name == null || region.name.isEmpty()) return false;
+        String sql = "DELETE FROM region WHERE name = '" + region.name + "'";
         Connection connection = null;
         Statement statement = null;
         try {
@@ -189,7 +187,7 @@ public class StateDao implements Dao<State> {
 
     @Override
     public boolean deleteAll() {
-        String sql = "DELETE FROM state";
+        String sql = "DELETE FROM region";
         Connection connection = null;
         Statement statement = null;
         try {
@@ -206,9 +204,9 @@ public class StateDao implements Dao<State> {
     }
 
     @Override
-    public State selectByName(String stateName) {
-        if (stateName == null || stateName.isEmpty()) return null;
-        String sql = "SELECT * FROM state WHERE name = '" + stateName + "'";
+    public Region selectByName(String regionName) {
+        if (regionName == null || regionName.isEmpty()) return null;
+        String sql = "SELECT * FROM region WHERE name = '" + regionName + "'";
         Connection connection = null;
         Statement statement = null;
         ResultSet rs = null;
@@ -220,13 +218,12 @@ public class StateDao implements Dao<State> {
             int id = rs.getInt("id");
             String name = rs.getString("name");
             String abbreviation = rs.getString("abbreviation");
-            String region = rs.getString("region");
             double min = rs.getDouble("min");
             double max = rs.getDouble("max");
             double average = rs.getDouble("average");
             double standardDeviation = rs.getDouble("standardDeviation");
             int rank = rs.getInt("rank");
-            return new State(id, name, abbreviation, region, min, max, average, standardDeviation, rank);
+            return new Region(id, name, abbreviation, min, max, average, standardDeviation, rank);
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
@@ -236,9 +233,9 @@ public class StateDao implements Dao<State> {
     }
 
     @Override
-    public State selectByAbbreviation(String stateAbbreviation) {
-        if (stateAbbreviation == null || stateAbbreviation.length() != 2) return null;
-        String sql = "SELECT * FROM state WHERE abbreviation = '" + stateAbbreviation + "'";
+    public Region selectByAbbreviation(String regionAbbreviation) {
+        if (regionAbbreviation == null || regionAbbreviation.length() != 2 && regionAbbreviation.length() != 1) return null;
+        String sql = "SELECT * FROM region WHERE abbreviation = '" + regionAbbreviation + "'";
         Connection connection = null;
         Statement statement = null;
         ResultSet rs = null;
@@ -250,13 +247,12 @@ public class StateDao implements Dao<State> {
             int id = rs.getInt("id");
             String name = rs.getString("name");
             String abbreviation = rs.getString("abbreviation");
-            String region = rs.getString("region");
             double min = rs.getDouble("min");
             double max = rs.getDouble("max");
             double average = rs.getDouble("average");
             double standardDeviation = rs.getDouble("standardDeviation");
             int rank = rs.getInt("rank");
-            return new State(id, name, abbreviation, region, min, max, average, standardDeviation, rank);
+            return new Region(id, name, abbreviation, min, max, average, standardDeviation, rank);
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
@@ -266,8 +262,8 @@ public class StateDao implements Dao<State> {
     }
 
     @Override
-    public State selectById(int id) {
-        String sql = "SELECT * FROM state WHERE id = '" + id + "'";
+    public Region selectById(int id) {
+        String sql = "SELECT * FROM region WHERE id = '" + id + "'";
         Connection connection = null;
         Statement statement = null;
         ResultSet rs = null;
@@ -278,13 +274,12 @@ public class StateDao implements Dao<State> {
             if (!rs.next()) return null;
             String name = rs.getString("name");
             String abbreviation = rs.getString("abbreviation");
-            String region = rs.getString("region");
             double min = rs.getDouble("min");
             double max = rs.getDouble("max");
             double average = rs.getDouble("average");
             double standardDeviation = rs.getDouble("standardDeviation");
             int rank = rs.getInt("rank");
-            return new State(id, name, abbreviation, region, min, max, average, standardDeviation, rank);
+            return new Region(id, name, abbreviation, min, max, average, standardDeviation, rank);
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
@@ -294,8 +289,8 @@ public class StateDao implements Dao<State> {
     }
 
     @Override
-    public List<State> selectAll() {
-        String sql = "SELECT * FROM state";
+    public List<Region> selectAll() {
+        String sql = "SELECT * FROM region";
         Connection connection = null;
         Statement statement = null;
         ResultSet rs = null;
@@ -303,20 +298,19 @@ public class StateDao implements Dao<State> {
             connection = DaoUtil.getConnection();
             statement = connection.createStatement();
             rs = statement.executeQuery(sql);
-            List<State> states = new ArrayList<State>();
+            List<Region> regions = new ArrayList<Region>();
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String name = rs.getString("name");
                 String abbreviation = rs.getString("abbreviation");
-                String region = rs.getString("region");
                 double min = rs.getDouble("min");
                 double max = rs.getDouble("max");
                 double average = rs.getDouble("average");
                 double standardDeviation = rs.getDouble("standardDeviation");
                 int rank = rs.getInt("rank");
-                states.add(new State(id, name, abbreviation, region, min, max, average, standardDeviation, rank));
+                regions.add(new Region(id, name, abbreviation, min, max, average, standardDeviation, rank));
             }
-            return states;
+            return regions;
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
@@ -324,5 +318,5 @@ public class StateDao implements Dao<State> {
             DaoUtil.closeConnection(connection, statement, rs);
         }
     }
-
+    
 }

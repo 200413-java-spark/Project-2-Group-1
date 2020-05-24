@@ -37,7 +37,7 @@ CREATE TABLE county (
     rank INTEGER
 );
 
-INSERT INTO region (id, name, abbreviation) VALUES (1, 'West', 'W');
-INSERT INTO region (id, name, abbreviation) VALUES (2, 'Midwest', 'MW');
-INSERT INTO region (id, name, abbreviation) VALUES (3, 'Northeast', 'NE');
-INSERT INTO region (id, name, abbreviation) VALUES (4, 'South', 'S');
+--INSERT INTO region (id, name, abbreviation) VALUES (1, 'West', 'W');
+--INSERT INTO region (id, name, abbreviation) VALUES (2, 'Midwest', 'MW');
+--INSERT INTO region (id, name, abbreviation) VALUES (3, 'Northeast', 'NE');
+--INSERT INTO region (id, name, abbreviation) VALUES (4, 'South', 'S');

@@ -1,7 +1,6 @@
 package output.dao;
 
 import java.util.List;
-import java.util.Map;
 
 public interface Dao<E> {
 
@@ -14,7 +13,7 @@ public interface Dao<E> {
     boolean updateManyByName(List<E> e, String column);
 
     boolean updateManyByAbbreviation(List<E> e, String column);
-    
+
     boolean updateManyById(List<E> e, String column);
 
     boolean delete(E e);
