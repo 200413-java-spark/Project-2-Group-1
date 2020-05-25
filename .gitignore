@@ -2,6 +2,8 @@
 # Additional
 *.project
 *.classpath
+src/test/resources/life-expectancy-data.csv
+src/test/resources/life-expectancy-data-sample.csv
 
 # Created by .ignore support plugin (hsz.mobi)
 ### Eclipse template
