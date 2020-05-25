@@ -1,8 +1,8 @@
 package com.github.sparkWeb.controllers;
 
 
-import com.github.sparkWeb.models.Calculation;
-import com.github.sparkWeb.services.CalculationService;
+import com.github.sparkWeb.models.Averages;
+import com.github.sparkWeb.services.AverageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,11 +13,11 @@ import java.util.List;
 public class ApiController {
 
     @Autowired
-    private CalculationService calculationService;
+    private AverageService averageService;
 
-    @GetMapping("/calculations")
-    public List<Calculation> getCalculations() {
-        return calculationService.getCalculations();
+    @GetMapping("/averages")
+    public List<Averages> getAverages() {
+        return averageService.getAverages();
     }
 
 }
