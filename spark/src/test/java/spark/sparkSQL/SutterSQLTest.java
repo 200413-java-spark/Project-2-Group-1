@@ -14,6 +14,8 @@ public class SutterSQLTest {
     
     // mvn test SutterSQLTest
 
+    private static final String INPUT_FILE = "src/test/resources/input/life-expectancy-data.csv";
+    private static final String INPUT_FILE_TEST = "src/test/resources/input/life-expectancy-data-sample.csv";
     private static SparkSession sparkSession;
     private static Dataset<Row> dataset;
     private static SutterSQL sutterSQL;
@@ -30,8 +32,8 @@ public class SutterSQLTest {
         // dataset = sparkSession
         //     .read()
         //     .option("header", true)
-        //     .csv("spark/life.csv");
-        
+        //     .csv(INPUT_FILE_TEST);
+
         // sutterSQL = new SutterSQL(dataset, sparkSession);
 
     }
