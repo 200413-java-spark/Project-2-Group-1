@@ -1,5 +1,10 @@
 # Changelog
-## Version 0.0.2
+
+## Version 0.0.4
+- added static controller for web
+- refactored spark init function
+
+## Version 0.0.3
 - added s3 functionality
 - fixed emr errors
 
