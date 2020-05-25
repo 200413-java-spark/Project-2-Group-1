@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-public class CalculationController {
+public class ApiController {
 
     @Autowired
     private CalculationService calculationService;
