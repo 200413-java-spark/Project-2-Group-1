@@ -16,10 +16,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-
 public class GetS3File {
 
-    public String fileName;
+    private String fileName;
     private String id;
     private String secret;
     private String bucketName;
@@ -62,7 +61,6 @@ public class GetS3File {
         for (S3ObjectSummary os : objectListing.getObjectSummaries()) {
             if (os.getKey().endsWith("csv") && os.getKey().startsWith("part")) {
                 fileName = os.getKey();
-                System.out.println(os.getKey());
             }
         }
         // Downloading an Object
@@ -71,8 +69,7 @@ public class GetS3File {
         S3ObjectInputStream inputStream = s3object.getObjectContent();
 
         try {
-            FileUtils.copyInputStreamToFile(inputStream, new File(
-                    fileName));
+            FileUtils.copyInputStreamToFile(inputStream, new File("C:\\Storage\\" + fileName));
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("File already exist");
