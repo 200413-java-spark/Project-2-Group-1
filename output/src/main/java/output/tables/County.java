@@ -1,31 +1,29 @@
 package output.tables;
 
-public class State {
-
+public class County {
+    
     public int id;
     public String name;
-    public String abbreviation;
-    public String region;
+    public String state;
     public double min;
     public double max;
     public double average;
     public double standardDeviation;
     public int rank;
 
-    public State(String name) {
+    public County(String name) {
         this.name = name;
-    }
-    
-    public State(String name, String abbreviation) {
-        this.name = name;
-        this.abbreviation = abbreviation;
     }
 
-    public State(int id, String name, String abbreviation, String region, double min, double max, double average, double standardDeviation, int rank) {
+    public County(String name, String state) {
+        this.name = name;
+        this.state = state;
+    }
+
+    public County(int id, String name, String state, double min, double max, double average, double standardDeviation, int rank) {
         this.id = id;
         this.name = name;
-        this.abbreviation = abbreviation;
-        this.region = region;
+        this.state = state;
         this.min = min;
         this.max = max;
         this.average = average;
@@ -49,8 +47,7 @@ public class State {
 
     public String getString(String field) {
         if (field.equals("name")) return this.name;
-        if (field.equals("abbreviation")) return this.abbreviation;
-        if (field.equals("region")) return this.region;
+        if (field.equals("state")) return this.state;
         return null;
     }
 

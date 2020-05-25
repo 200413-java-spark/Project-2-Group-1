@@ -1,3 +1,4 @@
 
-select * from county;
-select * from state;
+SELECT * FROM region;
+SELECT * FROM state;
+SELECT * FROM county;
