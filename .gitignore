@@ -194,3 +194,4 @@ hs_err_pid*
 spark/src/main/resources/localdump/*
 /output/src/main/resources/creds.properties
 spark/src/main/resources/localdump/*
+spark-warehouse
