@@ -1,4 +1,6 @@
 # Changelog
+## Version 1.0.0
+- added d3 chart for state averages
 
 ## Version 0.0.4
 - added static controller for web

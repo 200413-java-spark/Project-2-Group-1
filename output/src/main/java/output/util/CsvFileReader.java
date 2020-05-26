@@ -8,9 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Arrays;
 
-
 public class CsvFileReader {
-
 
     String sql = "INSERT INTO averages (state, average) VALUES (?, ?)";
     Connection connection = null;
@@ -20,7 +18,7 @@ public class CsvFileReader {
 
     public CsvFileReader(String fileName) {
         this.fileName = fileName;
-        System.out.println(fileName);
+
     }
 
     public void run() throws IOException, SQLException {
@@ -37,7 +35,6 @@ public class CsvFileReader {
                     firstLine = false;
                     continue;
                 }
-//                System.out.println(values[0].toString());
                 statement.setString(1, values[0].toString());
                 statement.setDouble(2, Double.parseDouble(values[1]));
                 statement.addBatch();
