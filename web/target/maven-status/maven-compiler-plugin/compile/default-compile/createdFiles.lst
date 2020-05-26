@@ -1,5 +1,0 @@
-com\github\sparkWeb\controllers\CalculationController.class
-com\github\sparkWeb\repositories\CalculationRepository.class
-com\github\sparkWeb\models\Calculation.class
-com\github\sparkWeb\services\CalculationService.class
-com\github\sparkWeb\WebApplication.class
