@@ -2,6 +2,9 @@
 # Additional
 *.project
 *.classpath
+spark/src/test/resources/input/
+spark/src/test/resources/output/
+spark/output-files/
 
 # Created by .ignore support plugin (hsz.mobi)
 ### Eclipse template
