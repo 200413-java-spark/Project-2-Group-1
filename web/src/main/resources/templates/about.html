@@ -7,7 +7,7 @@
         href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" 
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" 
         crossorigin="anonymous">
-        <title>Life Expectancy Analysis</title>
+        <title>About</title>
 
         <style>
             .bd-placeholder-img {
@@ -20,11 +20,6 @@
             }
             body {
                 padding-top: 3.5rem;
-            }
-            .jumbotron{
-                background-image: url(https://www.trussvilletribune.com/wp-content/uploads/2020/05/us-census.jpg);
-                background-size: cover;
-                height: 100%;
             }
             .page-footer {
             background-color: #222;
@@ -75,50 +70,60 @@
             </div>
         </nav>
 
-        <main role="main">
-            <!-- Main jumbotron for a primary marketing message or call to action -->
-            <div class="jumbotron text-white">
-              <div class="container">
-                <h1 class="display-3">Life Expectancy Analysis!</h1>
-                <p>The purpose of our project is to Analyze some data using Apache Spark
-                    about the Life Expectancy at Birth by state and Census Track for the
-                    period 2010-2015. We will be presenting several statistics about the
-                    transformations we found in the sections below. 
-                </p>
-                <p><a class="btn btn-primary btn-lg" href="https://data.cdc.gov/NCHS/U-S-Life-Expectancy-at-Birth-by-State-and-Census-T/5h56-n989" role="button">Learn more &raquo;</a></p>
-              </div>
-            </div>
-          
-            <div class="container">
-              <!-- Example row of columns -->
-              <div class="row">
-                <div class="col-md-4">
-                  <h2>Statistic 1</h2>
-                  <p>Life Expectancy Average by State. We will compare all 50 states and analyze
-                    the differences between them, returning the most relevant finds.
-                  </p>
-                  <p><a class="btn btn-primary" href="statistic1.html" role="button">View Results &raquo;</a></p>
-                </div>
-                <div class="col-md-4">
-                  <h2>Statistic 2</h2>
-                  <p>Life Expectancy Average by County. We will compare all counties from a specific
-                    state and analyze the differences between them, returning the most relevant finds.</p>
-                  <p><a class="btn btn-primary" href="#" role="button">View Results &raquo;</a></p>
-                </div>
-                <div class="col-md-4">
-                  <h2>Statistic 3</h2>
-                  <p>Life Expectancy Greater than 80. We will compare all 50 states and analyze
-                    which states have the greatest life expectancy averages, returning the most relevant finds.</p>
-                  <p><a class="btn btn-primary" href="#" role="button">View Results &raquo;</a></p>
-                </div>
-              </div>
-          
-              <hr>
-          
-            </div> <!-- /container -->
-          
-        </main>
-          
+        <h1>About</h1>
+
+        <h2>Apache Spark Life Expectancy Analysis 0.0.1</h2> 
+
+        <h3>Build</h3>
+        <h4>Java</h4>
+        <p>mvn clean package</p>
+        <p>java - jar project-1-john-1.0.1-SNAPSHOT.war</p>
+
+        <h4>Dockerfile</h4>
+        <p>FROM postgres<br>
+            ENV POSTGRES_USER mydb<br>
+            ENV POSTGRES_PASSWORD mydb<br>
+            EXPOSE 5432</p>
+        <h4>Docker</h4>
+        <p>docker build -t mydb -f ./Dockerfile<br>
+            docker run --name mydb -d --rm -p 5432:5432 mydb</p>
+
+        <h3>Usage</h3>
+        <h3>Design</h3>
+        <h3>Main Algorithm:</h3>
+
+        <h3>Architecture:</h3>
+        <h4>**Business Logic Layer:**</h4>
+        <li>Java</li>
+        <li>Apache Spark</li>
+        <li>Spring Boot</li>
+        <li>Spring MVC</li>
+
+        <h4>**Data Access Layer:**</h4>
+        <li>PostgreSQL</li>
+        <li>Spring JPA</li>
+        <li>Spring Data</li>
+
+        <h4>**Presentation Layer:**</h4>
+        <li>D3</li>
+        <li>Bootstrap 4</li>
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JavaScript</li>
+
+        <h4>**Business Logic Layer:**</h4>
+        <li>Java</li>
+        <li>Apache Spark</li>
+        <li>Spring Boot</li>
+        <li>Spring MVC</li>
+
+        <h4>**Build Tools:**</h4>
+        <li>Maven</li>
+        <li>Docker</li>
+        <li>JUnit</li>
+        <li>Tomcat</li>
+        <li>AWS - EC2 - S3</li>
+
         <!-- Here is the start of the website's footer--> 
 		<footer class="page-footer">
             <div class="container">
