@@ -1,43 +1,62 @@
 package output;
 
-import output.load.LoadRegionData;
-import output.load.LoadStateData;
-import output.load.LoadCountyData;
 import output.s3.GetS3File;
-import output.transform.TransformRegionData;
-import output.transform.TransformStateData;
-import output.transform.TransformCountyData;
-import output.util.DaoUtil;
+import output.util.CsvFileReader;
+
+import java.io.IOException;
+import java.sql.SQLException;
 
 public class Main {
 
-    public static void main(String[] args) {
-        if (resetDatabase()) {
-            extract();
-            transform();
-            load();
-        }
-    }
+    public static void main(String[] args) throws IOException, SQLException {
 
-    private static boolean resetDatabase() {
-        return DaoUtil.clearTables();
-    }
+        GetS3File getS3File = new GetS3File();
 
-    private static void extract() {
-        // GetS3File file1 = new GetS3File();
-        // file1.run();
-    }
+        getS3File.run();
 
-    private static void transform() {
-        TransformRegionData.execute();
-        TransformStateData.execute();
-        TransformCountyData.execute();
+        CsvFileReader csvFileReader = new CsvFileReader(getS3File.getFileName());
+        csvFileReader.run();
     }
-    
-    private static void load() {
-        LoadRegionData.execute();
-        LoadStateData.execute();
-        LoadCountyData.execute();
-    }
-
 }
+
+ 
+//public class Main {
+//
+//    public static void main(String[] args) throws IOException {
+//
+//        GetS3File getS3File = new GetS3File();
+//
+//        getS3File.run();
+//
+//        CsvFileReader csvFileReader = new CsvFileReader(getS3File.getFileName());
+//        csvFileReader.run();
+//
+////        if (resetDatabase()) {
+////            extract();
+////            transform();
+////            load();
+////        }
+////    }
+////
+////    private static boolean resetDatabase() {
+////        return DaoUtil.clearTables();
+////    }
+////
+////    private static void extract() {
+////        // GetS3File file1 = new GetS3File();
+////        // file1.run();
+////    }
+////
+////    private static void transform() {
+////        TransformRegionData.execute();
+////        TransformStateData.execute();
+////        TransformCountyData.execute();
+////    }
+////
+////    private static void load() {
+////        LoadRegionData.execute();
+////        LoadStateData.execute();
+////        LoadCountyData.execute();
+//    }
+//
+//}
