@@ -23,5 +23,7 @@ public class MasterSQL {
         johnSQL.run();
         danielSQL.run();
         sutterSQL.run();
+
+        sparkSession.close();
     }
 }
