@@ -12,7 +12,7 @@ import org.apache.spark.sql.SparkSession;
 
 import com.github.sparkBusiness.sparkSQL.SutterSQL;
 
-// @Ignore
+@Ignore
 public class SutterSQLTest {
 
     // mvn clean test -Dtest=SutterSQLTest
@@ -26,7 +26,7 @@ public class SutterSQLTest {
     @BeforeClass
     public static void createSession() {
         sparkSession = SparkSession.builder().appName("spark-sql-sutter").master("local[*]").getOrCreate();
-        dataset = sparkSession.read().option("header", true).csv(INPUT_FILE_TEST);
+        dataset = sparkSession.read().option("header", true).csv(INPUT_FILE);
     }
 
     @AfterClass

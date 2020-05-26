@@ -6,20 +6,24 @@ import org.apache.spark.sql.SparkSession;
 
 import static org.apache.spark.sql.functions.col;
 
+import com.github.sparkBusiness.util.SaveDataset;
+
 public class SutterSQL implements SQLInt {
 
     public Dataset<Row> dataset;
     public SparkSession sparkSession;
+    public final SaveDataset saveDataset;
 
     public SutterSQL(Dataset<Row> dataset, SparkSession sparkSession) {
         this.dataset = dataset;
         this.sparkSession = sparkSession;
+        this.saveDataset = new SaveDataset();
     }
 
     @Override
     public void run() {
         try {
-            execute();
+            // execute();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -27,8 +31,33 @@ public class SutterSQL implements SQLInt {
 
     public void execute() throws Exception {
 
-        // Dataset<Row> df = dataset.cache();
+        // learnSparkSQL();
+        // return;
+
+        // calculate max for each county
         Dataset<Row> df = dataset;
+        Dataset<Row> result = df.drop(col("Census_Tract_Number"))
+                .drop(col("Life_Expectancy_Range"))
+                .drop(col("Life_Expectancy_Standard_Error"))
+                .filter(col("State").isNotNull())
+                .filter(col("County").isNotNull())
+                .filter(col("Life_Expectancy").isNotNull())
+                .withColumn("state", col("State"))
+                .withColumn("county", col("County"))
+                .withColumn("life_expectancy", col("Life_Expectancy").cast("decimal"))
+                .groupBy(col("county"))
+                .max("life_expectancy");
+        
+        // save Dataset as CSV file
+        String[] columns = {"county", "state_abbreviation", "life_expectancy"};
+        saveDataset.save(result, columns, 3, "output-files/county_max_2020-05-26.csv");
+
+    }
+
+    public void learnSparkSQL() {
+
+        // Dataset<Row> df = dataset.cache();
+        //Dataset<Row> df = dataset;
 
         // PRINT SCHEMA:
         //df.printSchema();
@@ -47,29 +76,6 @@ public class SutterSQL implements SQLInt {
         //df.groupBy("State").count().show();
         //df.groupBy("County").count().show();
 
-        //Seq<String> columns = new Seq<String>();
-        //columns.addString("county");
-        //df.withColumns(colNames, cols);
-        //df.withColumn("life_expectancy", col("Life_Expectancy").cast("decimal"))
-            //.max()
-        //df.apply("Life_Expectancy").cast("decimal");
-            
-        df.drop(col("State"))
-            .drop(col("Census_Tract_Number"))
-            .drop(col("Life_Expectancy_Range"))
-            .drop(col("Life_Expectancy_Standard_Error"))
-            .filter(col("Life_Expectancy").isNotNull());
-            //.filter(col("Life_Expectancy").gt(0))
-            //.filter(col("Life_Expectancy").lt(100))
-            //.groupBy("County")
-            // .max("Life_Expectancy")
-            //.show();
-
-        df.apply("Life_Expectancy").cast("decimal");
-
-        df.groupBy("County")
-            .max(col("Life_Expectancy").cast("decimal"))
-            .show();
 
 
 
@@ -80,7 +86,7 @@ public class SutterSQL implements SQLInt {
         // Dataset<Row> count = sparkSession.sql("SELECT COUNT(*) FROM County");
         // count.show();
         // Dataset<Row> results = sparkSession.sql("SELECT COUNT(*) FROM counties");
-    
+
     }
 
 }
