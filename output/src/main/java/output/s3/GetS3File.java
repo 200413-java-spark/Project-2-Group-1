@@ -6,14 +6,14 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
-import com.amazonaws.services.s3.model.ObjectListing;
-import com.amazonaws.services.s3.model.S3ObjectInputStream;
-import com.amazonaws.services.s3.model.S3ObjectSummary;
+import com.amazonaws.services.s3.model.*;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 public class GetS3File {
@@ -56,18 +56,24 @@ public class GetS3File {
     }
 
     private void downloadCSV() {
+
+
         // Listing Objects
-        ObjectListing objectListing = s3client.listObjects(bucketName);
+        ObjectListing objectListing = s3client.listObjects(bucketName,"output");
         for (S3ObjectSummary os : objectListing.getObjectSummaries()) {
-            if (os.getKey().endsWith("csv") && os.getKey().startsWith("part")) {
+            if (os.getKey().endsWith("csv") && os.getKey().startsWith("output/part")) {
                 fileName = os.getKey();
+
             }
+            System.out.println(os);
         }
+
+
         // Downloading an Object
         com.amazonaws.services.s3.model.S3Object s3object = s3client.getObject(bucketName, fileName);
 
         S3ObjectInputStream inputStream = s3object.getObjectContent();
-
+//
         try {
             FileUtils.copyInputStreamToFile(inputStream, new File("C:\\Storage\\" + fileName));
         } catch (IOException e) {

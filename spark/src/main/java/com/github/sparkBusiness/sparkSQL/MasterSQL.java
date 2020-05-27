@@ -17,12 +17,12 @@ public class MasterSQL {
 
     public void runQ() {
         JohnSQL johnSQL = new JohnSQL(dataset, sparkSession);
-        DanielSQL danielSQL = new DanielSQL(dataset, sparkSession);
-        SutterSQL sutterSQL = new SutterSQL(dataset, sparkSession);
+//        DanielSQL danielSQL = new DanielSQL(dataset, sparkSession);
+//        SutterSQL sutterSQL = new SutterSQL(dataset, sparkSession);
 
         johnSQL.run();
-        danielSQL.run();
-        sutterSQL.run();
+//        danielSQL.run();
+//        sutterSQL.run();
 
         sparkSession.close();
     }
