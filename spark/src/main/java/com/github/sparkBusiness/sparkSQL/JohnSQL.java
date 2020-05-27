@@ -39,18 +39,18 @@ sparkSession.conf().set("spark.sql.crossJoin.enabled", true);
 
 
 
-        longestAverageByState.show();
+//        longestAverageByState.show();
 //        longestAverageByCounty.show();
 //        longestLifeRecord.show();
 
-//        longestAverageByState
-//                .coalesce(1);
-//                .write()
-//                .format("csv")
-//                .option("header", "true")
-//                .mode(SaveMode.Overwrite)
+        longestAverageByState
+                .coalesce(1)
+                .write()
+                .format("csv")
+                .option("header", "true")
+                .mode(SaveMode.Overwrite)
 //                .save("spark/src/main/resources/localdump");
-//        .save("s3://p2storage-jsd/");
+        .save("s3://p2storage-jsd/output");
 
 
 
