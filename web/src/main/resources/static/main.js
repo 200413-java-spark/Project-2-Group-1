@@ -1,8 +1,10 @@
-const mVar =125;
+const bmVar =235;
+const tmVar =10;
 const lmVar = 35;
-const margin = {top: lmVar, right: lmVar, bottom: mVar, left: lmVar};
-const width = window.innerWidth;
-const height = window.innerHeight - margin.top - margin.bottom ;
+const rmVar = 35;
+const margin = {top: tmVar, right: rmVar, bottom: bmVar, left: lmVar};
+const width = window.innerWidth - 80;
+const height = window.innerHeight - margin.top - margin.bottom;
 
 const svg = d3.select("#visualization")
     .append("svg")
@@ -42,7 +44,7 @@ d3.json('http://localhost:8080/averages').then((data) => {
         })
         .attr("height", (d) => {
             return height - y(d.average)
-        }).style("fill", "#006B38FF")
+        }).style("fill", "#007bff")
         .style("stroke", "#101820FF")
 
     svg.append("g")
