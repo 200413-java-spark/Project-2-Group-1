@@ -1,5 +1,45 @@
 body {
     background-color: #F5F5F5;
-    overflow-y: hidden; /* Hide vertical scrollbar */
+    /*overflow-y: hidden; !* Hide vertical scrollbar *!*/
     /*overflow-x: hidden; !* Hide horizontal scrollbar *!*/
+}
+
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+body {
+    padding-top: 3.5rem;
+}
+
+.jumbotron {
+    background-image: url(https://www.trussvilletribune.com/wp-content/uploads/2020/05/us-census.jpg);
+    background-size: cover;
+    height: 100%;
+}
+
+.page-footer {
+    background-color: #222;
+    color: #ccc;
+    padding: 60px 0 30px;
+}
+
+.footer-copyright {
+    color: #666;
+    padding: 40px 0;
+}
+
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
+}
+
+.my-ml-auto{
+    margin-left: 85%;
 }

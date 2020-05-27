@@ -11,6 +11,11 @@ public class StaticController {
         return "index";
     }
 
+    @RequestMapping(value = "about")
+    public String about() {
+        return "about";
+    }
+
 
     @RequestMapping(value = "state-averages")
     public String stateAverages() {
