@@ -9,6 +9,11 @@ public class JohnSQL implements SQLInt {
 
     public Dataset<Row> dataset;
     public SparkSession sparkSession;
+    private Dataset<Row> longestAverageByState;
+    private Dataset<Row> longestAverageByCountyTop5;
+    private Dataset<Row> longestLifeRecord;
+    private Dataset<Row> shortestLifeRecord;
+    private Dataset<Row> removeNullsShortestLifeRecord;
 
     public JohnSQL(Dataset<Row> dataset, SparkSession sparkSession) {
         this.dataset = dataset;
@@ -20,42 +25,37 @@ public class JohnSQL implements SQLInt {
 
         dataset.createOrReplaceTempView("life");
 
-sparkSession.conf().set("spark.sql.crossJoin.enabled", true);
+        datasetBuilder();
+        bucketBuilder(longestAverageByState, "output0");
+        bucketBuilder(longestAverageByCountyTop5, "output1");
+        bucketBuilder(longestLifeRecord, "output2");
+        bucketBuilder(removeNullsShortestLifeRecord, "output3");
 
-        // State, Life Expectancy
-        Dataset<Row> longestAverageByState = sparkSession
-                .sql("select State, format_number(avg(Life_Expectancy), 2) as Average_Life_Expectancy from life group by State order by Average_Life_Expectancy desc");
+    }
 
-        // County, Life Expectancy
-//        Dataset<Row> longestAverageByCounty = sparkSession
-//                .sql("select County, format_number(avg(Life_Expectancy), 2) as Average_Life_Expectancy from life group by County order by Average_Life_Expectancy desc ");
+    private void datasetBuilder() {
+        longestAverageByState = sparkSession
+                .sql("select State, format_number(avg(Life_Expectancy), 2) as Average_Life_Expectancy from life group by State order by Average_Life_Expectancy asc ");
 
+        longestAverageByCountyTop5 = sparkSession
+                .sql("select County, format_number(avg(Life_Expectancy), 2) as Average_Life_Expectancy from life group by County order by Average_Life_Expectancy desc limit 5");
 
-        // State, Life Expectancy
-//        Dataset<Row> longestLifeRecord = sparkSession
-//                .sql("select distinct State, Life_Expectancy  from life order by Life_Expectancy desc limit 1");
+        longestLifeRecord = sparkSession
+                .sql("select State, Life_Expectancy  from life order by Life_Expectancy desc");
 
-//        Dataset<Row> allTogether = longestAverageByCounty.join(longestAverageByCounty);
+        shortestLifeRecord = sparkSession
+                .sql("select State, Life_Expectancy  from life order by Life_Expectancy asc");
 
+        removeNullsShortestLifeRecord = shortestLifeRecord.where("Life_Expectancy is not null");
+    }
 
-
-//        longestAverageByState.show();
-//        longestAverageByCounty.show();
-//        longestLifeRecord.show();
-
-        longestAverageByState
-                .coalesce(1)
+    private void bucketBuilder(Dataset<Row> dataset, String bucketName) {
+        dataset.coalesce(1)
                 .write()
                 .format("csv")
                 .option("header", "true")
                 .mode(SaveMode.Overwrite)
-//                .save("spark/src/main/resources/localdump");
-        .save("s3://p2storage-jsd/output");
-
-
-
-
-
+                .save("s3://p2storage-jsd/" + bucketName);
     }
 }
 // State,
