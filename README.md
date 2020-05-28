@@ -6,7 +6,7 @@ Processes the data life expectancy data from U.S. Life Expectancy at Birth by St
 
 https://data.cdc.gov/NCHS/U-S-Life-Expectancy-at-Birth-by-State-and-Census-T/5h56-n989. 
 
-The applcation computes the life expectancy by state and outputs them in the form of a d3 chart.
+The application computes the life expectancy by state and outputs them in the form of a d3 chart.
 
 ******
 ## Build
