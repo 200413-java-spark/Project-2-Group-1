@@ -1,4 +1,9 @@
 # Changelog
+## Version 1.0.1
+- added init funciton for output 
+- cleaned up johnSQL
+- cleaned up comments
+
 ## Version 1.0.0
 - added d3 chart for state averages
 
