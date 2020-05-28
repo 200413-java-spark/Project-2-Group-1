@@ -25,10 +25,10 @@ public class DanielSQL implements SQLInt {
 
         dataset.createOrReplaceTempView("stats");
         dataBuilder();
-        bucketBuilder(StateswithAvgabove80, "output4");
-        bucketBuilder(CountieswithAvgabove80, "output5");
-        bucketBuilder(StateswithAvgbelow60, "output6");
-        bucketBuilder(CountieswithAvgbelow60, "output7");
+        bucketBuilder(StateswithAvgabove80, "output0");
+        bucketBuilder(CountieswithAvgabove80, "output1");
+        bucketBuilder(StateswithAvgbelow60, "output2");
+        bucketBuilder(CountieswithAvgbelow60, "output3");
 
     }
 
