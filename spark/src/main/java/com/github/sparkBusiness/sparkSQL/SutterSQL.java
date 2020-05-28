@@ -34,9 +34,8 @@ public class SutterSQL implements SQLInt {
         // learnSparkSQL();
         // return;
 
-        // calculate max for each county
-        Dataset<Row> df = dataset;
-        Dataset<Row> result = df.drop(col("Census_Tract_Number"))
+        // trim dataset
+        Dataset<Row> data = dataset.drop(col("Census_Tract_Number"))
                 .drop(col("Life_Expectancy_Range"))
                 .drop(col("Life_Expectancy_Standard_Error"))
                 .filter(col("State").isNotNull())
@@ -44,13 +43,43 @@ public class SutterSQL implements SQLInt {
                 .filter(col("Life_Expectancy").isNotNull())
                 .withColumn("state", col("State"))
                 .withColumn("county", col("County"))
-                .withColumn("life_expectancy", col("Life_Expectancy").cast("decimal"))
-                .groupBy(col("county"))
-                .max("life_expectancy");
+                .withColumn("life_expectancy", col("Life_Expectancy").cast("decimal"));
+                //.cache();
         
-        // save Dataset as CSV file
-        String[] columns = {"county", "state_abbreviation", "life_expectancy"};
-        saveDataset.save(result, columns, 3, "output-files/county_max_2020-05-26.csv");
+        // Dataset<Row> allCounties = data.drop(col("life_expectancy"))
+        //     .distinct()
+        //     .cache();
+            
+        Dataset<Row> counties = data
+            .groupBy(col("state"), col("county"))
+            .avg("life_expectancy");
+            //.as("averages")
+            //.cache();
+        //counties.show();
+        
+        // Dataset<Row> stateAverages = counties
+        //     .groupBy(col("state"))
+        //     .avg("avg(life_expectancy)")
+        //     .cache();
+
+        // Dataset<Row> stateMinimums = counties
+        //     .groupBy(col("state"))
+        //     .min("avg(life_expectancy)")
+        //     .cache();
+        
+        // Dataset<Row> stateMaximums = counties
+        //     .groupBy(col("state"))
+        //     .max("avg(life_expectancy)")
+        //     .cache();
+        
+        // Dataset<Row> result = stateAverages
+        //     .join(stateMinimums, stateAverages.col("state").equalTo(stateMinimums.col("state")))
+        //     .join(stateMaximums, stateAverages.col("state").equalTo(stateMaximums.col("state")))
+        //     .cache();
+
+        // // save Dataset as CSV file
+        // String[] columns = {"state", "average", "min", "max"};
+        // saveDataset.save(result, columns, 4, "output-files/state_stats_2020-05-28.csv");
 
     }
 

@@ -2,7 +2,7 @@
 
 ******
 
-Processes the data life expectancy data from U.S. Life Expectancy at Birth by State and Census Tract - 2010-2015
+Processes the life expectancy data from U.S. Life Expectancy at Birth by State and Census Tract - 2010-2015 Dataset.
 
 https://data.cdc.gov/NCHS/U-S-Life-Expectancy-at-Birth-by-State-and-Census-T/5h56-n989. 
 
