@@ -6,14 +6,14 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
-import com.amazonaws.services.s3.model.*;
+import com.amazonaws.services.s3.model.ObjectListing;
+import com.amazonaws.services.s3.model.S3ObjectInputStream;
+import com.amazonaws.services.s3.model.S3ObjectSummary;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 
 public class GetS3File {
@@ -23,11 +23,16 @@ public class GetS3File {
     private String secret;
     private String bucketName;
     private AmazonS3 s3client;
+    private String folderName;
+
+    public GetS3File(String folderName){
+        this.folderName = folderName;
+    }
 
     public void run() {
         readProperties();
         setupCredentials();
-        downloadCSV();
+        downloadCSV(folderName);
     }
 
     private void readProperties() {
@@ -55,13 +60,13 @@ public class GetS3File {
                 .build();
     }
 
-    private void downloadCSV() {
+    private void downloadCSV(String folderName) {
 
 
         // Listing Objects
-        ObjectListing objectListing = s3client.listObjects(bucketName,"output");
+        ObjectListing objectListing = s3client.listObjects(bucketName, folderName);
         for (S3ObjectSummary os : objectListing.getObjectSummaries()) {
-            if (os.getKey().endsWith("csv") && os.getKey().startsWith("output/part")) {
+            if (os.getKey().endsWith("csv") && os.getKey().startsWith(folderName + "/part")) {
                 fileName = os.getKey();
 
             }

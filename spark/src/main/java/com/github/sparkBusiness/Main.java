@@ -10,9 +10,9 @@ public class Main {
     public static void main(String[] args) {
 
 //        For Local Mode
-//        SessionConfig sessionConfig = new SessionConfig("local");
+        SessionConfig sessionConfig = new SessionConfig("local");
 //        For EMR
-        SessionConfig sessionConfig = new SessionConfig("emr");
+//        SessionConfig sessionConfig = new SessionConfig("emr");
         MasterSQL masterSQL = new MasterSQL(sessionConfig.getDataset(), sessionConfig.getSparkSession());
         masterSQL.runQ();
     }
