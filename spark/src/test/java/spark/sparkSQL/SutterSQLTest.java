@@ -26,7 +26,7 @@ public class SutterSQLTest {
     @BeforeClass
     public static void createSession() {
         sparkSession = SparkSession.builder().appName("spark-sql-sutter").master("local[*]").getOrCreate();
-        dataset = sparkSession.read().option("header", true).csv(INPUT_FILE);
+        dataset = sparkSession.read().option("header", true).csv(INPUT_FILE_TEST);
     }
 
     @AfterClass
