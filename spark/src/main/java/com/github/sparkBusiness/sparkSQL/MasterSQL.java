@@ -8,22 +8,30 @@ public class MasterSQL {
 
     public Dataset<Row> dataset;
     public SparkSession sparkSession;
+    private final String mode;
 
-
-    public MasterSQL(Dataset<Row> dataset, SparkSession sparkSession) {
+    public MasterSQL(String mode, Dataset<Row> dataset, SparkSession sparkSession) {
         this.dataset = dataset;
         this.sparkSession = sparkSession;
+        this.mode = mode;
+        factory();
+        sparkSession.close();
     }
 
-    public void runQ() {
-        JohnSQL johnSQL = new JohnSQL(dataset, sparkSession);
-//        DanielSQL danielSQL = new DanielSQL(dataset, sparkSession);
-//        SutterSQL sutterSQL = new SutterSQL(dataset, sparkSession);
-
-        johnSQL.run();
-//        danielSQL.run();
-//        sutterSQL.run();
-
-        sparkSession.close();
+    public void factory(){
+        SQLInt sqlInt;
+        switch (mode){
+            case "john":{
+                sqlInt = new JohnSQL(dataset, sparkSession);
+                return;
+            }
+            case "daniel":{
+                sqlInt = new DanielSQL(dataset, sparkSession);
+                return;
+            }
+            case "sutter":{
+                sqlInt = new SutterSQL(dataset, sparkSession);
+            }
+        }
     }
 }

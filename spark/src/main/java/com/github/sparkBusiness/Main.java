@@ -9,12 +9,10 @@ import org.apache.spark.sql.SparkSession;
 public class Main {
     public static void main(String[] args) {
 
-//        For Local Mode
+//        Mode -> local || emr
         SessionConfig sessionConfig = new SessionConfig("local");
-//        For EMR
-//        SessionConfig sessionConfig = new SessionConfig("emr");
-        MasterSQL masterSQL = new MasterSQL(sessionConfig.getDataset(), sessionConfig.getSparkSession());
-        masterSQL.runQ();
+//        mode john || sutter || daniel
+        new MasterSQL("john",sessionConfig.getDataset(), sessionConfig.getSparkSession());
     }
 }
 

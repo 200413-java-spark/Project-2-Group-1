@@ -25,25 +25,30 @@ public class DanielSQL implements SQLInt {
 
         dataset.createOrReplaceTempView("stats");
         dataBuilder();
-        bucketBuilder(StateswithAvgabove80, "output0");
-        bucketBuilder(CountieswithAvgabove80, "output1");
-        bucketBuilder(StateswithAvgbelow60, "output2");
-        bucketBuilder(CountieswithAvgbelow60, "output3");
+//        bucketBuilder(StateswithAvgabove80, "output0");
+//        bucketBuilder(CountieswithAvgabove80, "output1");
+//        bucketBuilder(StateswithAvgbelow60, "output2");
+//        bucketBuilder(CountieswithAvgbelow60, "output3");
+
+        StateswithAvgabove80.where("Average_Above_80 > 80").show();
+        CountieswithAvgabove80.where("Average_Above_80 > 80").show();
+        StateswithAvgbelow60.where("Average_Below_60 < 60").show();
+        CountieswithAvgbelow60.where("Average_Below_60 < 60").show();
 
     }
 
     private void dataBuilder() {
         StateswithAvgabove80 = sparkSession
-        .sql("select State, format_number(avg(Life_Expectancy), 2) as Average_Above_80 from stats where Life_Expectancy >= 80 group by State order by Average_Above_80 asc limit 10");
+                .sql("select State, format_number(avg(Life_Expectancy), 2) as Average_Above_80 from stats group by State order by Average_Above_80 asc");
 
         CountieswithAvgabove80 = sparkSession
-        .sql("select County, format_number(avg(Life_Expectancy), 2) as Average_Above_80 from stats where Life_Expectancy >= 80 group by County order by Average_Above_80 asc limit 10");
+                .sql("select County, format_number(avg(Life_Expectancy), 2) as Average_Above_80 from stats group by County order by Average_Above_80 asc");
 
         StateswithAvgbelow60 = sparkSession
-        .sql("select State, format_number(avg(Life_Expectancy), 2) as Average_Below_60 from stats where Life_Expectancy <= 60 group by State order by Average_Below_60 asc limit 10");
+                .sql("select State, format_number(avg(Life_Expectancy), 2) as Average_Below_60 from stats group by State order by Average_Below_60 asc");
 
         CountieswithAvgbelow60 = sparkSession
-        .sql("select County, format_number(avg(Life_Expectancy), 2) as Average_Below_60 from stats where Life_Expectancy <= 60 group by County order by AAverage_Below_60 asc limit 10");
+                .sql("select County, format_number(avg(Life_Expectancy), 2) as Average_Below_60 from stats group by County order by Average_Below_60 asc");
     }
 
     private void bucketBuilder(Dataset<Row> dataset, String bucketName) {
