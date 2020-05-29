@@ -1,41 +1,56 @@
 # Changelog
-## Version 1.0.1
-- added init funciton for output 
-- cleaned up johnSQL
-- cleaned up comments
+
+## Version 1.0.2
+### Changed:
+- Factory For Sql Statements
+
+## Version 1.0.
+### Added: 
+- Init Function For Output 
+
+### Changed:
+- Cleaned Up Johnsql
+- Cleaned Up Comments
 
 ## Version 1.0.0
-- added d3 chart for state averages
+### Added: 
+- D3 Chart For State Averages
 
 ## Version 0.0.4
-- added static controller for web
-- refactored spark init function
+### Added: 
+- A Static Controller For Web
+
+### Changed:
+- Refactored Spark Init Function
 
 ## Version 0.0.3
-- added s3 functionality
-- fixed emr errors
+### Added: 
+- S3 Functionality
+
+### Changed:
+- Fixed Emr Errors
 
 ## Version 0.0.2
+### Added: 
+- Output Module
+- Spark Module
 
-- output module
-- spark module
+### Changed:
+- Version Of Sparksql
+- Dataset
 
-## Changed
-- version of sparksql
-- dataset
-
-## Removed 
-- legacy modules
+### Removed:
+- Legacy Modules
 
 ## Version 0.0.1
 
-##Added:
-- file structure 
-- connected jpa
-- dependencies
+###added:
+- File Structure 
+- Connected Jpa
+- Dependencies
 - Calculation Model
 - CalculationRepository
 - CalculationService
 - CalculationController
-- SGVApplication
-- setup gitignore
+- SgvApplication
+- Setup Gitignore

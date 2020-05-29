@@ -15,7 +15,7 @@
     </parent>
     <groupId>com.github</groupId>
     <artifactId>spark-life</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.2-SNAPSHOT</version>
     <name>spark-life</name>
     <description>Apache Spark Life</description>
 
