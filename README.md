@@ -38,26 +38,26 @@ java -jar web.jar
 ## Design
 
 ### Main Algorithm: 
-- Then The Spark Jar Must Be Submitted To An Amazon Emr Cluster Using Spark-submit. 
-- From There The Application Will Process The Life Expectancy Data From A Csv Located Within A S3 Bucket.
+- The Spark Jar Must Be Submitted To An Amazon Emr Cluster Using Spark-submit. 
+- The Application Will Process The Life Expectancy Data From A Csv Located Within A S3 Bucket.
 - The Application Will Store The Output To A S3 Bucket. 
-- The User Must Start The Output Jar With The Folder Or Folders Of The Spark Output.
+- User Must Start The Output Jar With The Folder Or Folders Of The Spark Output.
 - The Application Will Then Retrieve The Output From The S3 Bucket And Persist It To A Postgresql Instance.
-- The User Must Start The Web Jar From Which The Jar Will Create A Web View Of The Project Website.
+- User Must Start The Web Jar From Which The Jar Will Create A Web View Of The Project Website.
 - The Drop Down Labeled State Averages Displays The Results.
 
 ### Architecture:
-**Business Logic Layer:**
+**Business Layer:**
 - Java
 - Apache SparkSQL
-- Spring Boot
 
-**Data Access Layer:**
+**Data Layer:**
 - PostgreSQL
 - Spring JPA
 - JDBC
 
 **Presentation Layer:**
+- Spring Boot
 - Spring MVC
 - D3
 - Bootstrap 4
